@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment { 
         registry = "hend91/node-board" 
-        #registryCredential = 'dockerhub_id' 
+        //registryCredential = 'dockerhub_id' 
         dockerImage = '' 
     }
     options {

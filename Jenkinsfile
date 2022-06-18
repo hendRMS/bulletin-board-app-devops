@@ -23,26 +23,26 @@ pipeline {
     //            echo "stop"
     //        }
     //    }
-///        stage('Checkout from GitHub') {
-///        //    when {
-///        //        beforeAgent true
-///        //        expression { return params.Refresh == false }
-///        //    }
-///            steps {
-///                checkout([
-///                    $class: 'GitSCM',
-///                    branches: [[name: "*/${params.branch}"]],
-///                    extensions: [],
-///                    userRemoteConfigs: [[
-///                     //   credentialsId: 'rflx-jenkins',
-///                        url: 'https://github.com/hendRMS/bulletin-board-app-devops.git'
-///                        ]]
-///                ])
-///                //withCredentials([file(credentialsId: "terraform-sa", variable: 'GC_KEY')]) {
-///                //    sh 'cp $GC_KEY creds.json'
-///               // }
-///            }
-///        }
+        stage('Checkout from GitHub') {
+        //    when {
+        //        beforeAgent true
+        //        expression { return params.Refresh == false }
+        //    }
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "*/master"],
+                    extensions: [],
+                    userRemoteConfigs: [[
+                     //   credentialsId: 'rflx-jenkins',
+                        url: 'https://github.com/hendRMS/bulletin-board-app-devops.git'
+                        ]]
+                ])
+                //withCredentials([file(credentialsId: "terraform-sa", variable: 'GC_KEY')]) {
+                //    sh 'cp $GC_KEY creds.json'
+               // }
+            }
+        }
         stage('Update the code') {
         //    when {
         //        beforeAgent true

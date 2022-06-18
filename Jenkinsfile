@@ -73,6 +73,7 @@ pipeline {
             steps {
                 script {
                     echo "====Building Docker Image===="
+                    sh 'docker version'
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                             
                         }    

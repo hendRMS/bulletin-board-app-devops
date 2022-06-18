@@ -52,54 +52,44 @@ pipeline {
 
                 }
             }
-            stages {
-                stage('Run startup script') {
-                    steps {
-                        script {
-                                echo "====Running StartUp script ===="
-                                sh """
-                                   sed -i 's/145/0,.1/g' site.css
-                                   sed -i 's/98/0/g' site.css
-                                   sed -i 's/41/0/g' site.css
-                                   sed -i 's/rgb/rgba/g' site.css
-                                   sed -i 's/380a66/366ec3/g' site.css
-                                   sed -i 's/Board/Board Demo!/g' index.html
-                                   """
-                                   }
-                               }       
-                            }  
-                        }    
-                    }
-                }
-                stage('Build Docker Image') {
-                    steps {
-                        script {
-                            echo "====Building Docker Image===="
-                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+        stage('Run startup script') {
+            steps {
+                script {
+                        echo "====Running StartUp script ===="
+                        sh """
+                           sed -i 's/145/0,.1/g' site.css
+                           sed -i 's/98/0/g' site.css
+                           sed -i 's/41/0/g' site.css
+                           sed -i 's/rgb/rgba/g' site.css
+                           sed -i 's/380a66/366ec3/g' site.css
+                           sed -i 's/Board/Board Demo!/g' index.html
+                           """
+                           }
+                        }       
+            }  
+                        //}    
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    echo "====Building Docker Image===="
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                             
                         }    
                     }
                 }
-                stage('Push Docker Image') {
-                    steps {
-                        script {
-                            echo "====Push Docker Image===="
-                            dockerImage.push() 
+        stage('Push Docker Image') {
+            steps {
+                script {
+                   echo "====Push Docker Image===="
+                    dockerImage.push() 
                         }    
                     }
                 }
-                stage('Cleaning up') { 
-                   steps { 
-                   sh "docker rmi $registry:$BUILD_NUMBER" 
+        stage('Cleaning up') { 
+           steps { 
+              sh "docker rmi $registry:$BUILD_NUMBER" 
                    }
                 } 
-            }
-        }
-    }
-    post{
-        always{
-            echo "====Cleaning the workspace===="
-            cleanWs()
-        }
     }
 }

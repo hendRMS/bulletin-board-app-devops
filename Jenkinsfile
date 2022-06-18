@@ -10,24 +10,24 @@ pipeline {
         ansiColor('xterm')
         skipDefaultCheckout(true)
     }
-    parameters {
-        booleanParam(name: 'Refresh', defaultValue: false, description: "Refresh only pipeline configuration")
-        string(name: 'branch', defaultValue: 'main', description: "Branch to build (will also be the Jenkinsfile source)")
-    }
+//    parameters {
+//        booleanParam(name: 'Refresh', defaultValue: false, description: "Refresh only pipeline configuration")
+//        string(name: 'branch', defaultValue: 'main', description: "Branch to build (will also be the Jenkinsfile source)")
+//    }
     stages {
-        stage('Read Jenkins file') {
-            when {
-                expression { return params.Refresh == true }
-            }
-            steps {
-                echo "stop"
-            }
-        }
+    //    stage('Read Jenkins file') {
+    //        when {
+    //            expression { return params.Refresh == true }
+    //        }
+    //        steps {
+    //            echo "stop"
+    //        }
+    //    }
         stage('Checkout from GitHub') {
-            when {
-                beforeAgent true
-                expression { return params.Refresh == false }
-            }
+        //    when {
+        //        beforeAgent true
+        //        expression { return params.Refresh == false }
+        //    }
             steps {
                 checkout([
                     $class: 'GitSCM',
@@ -44,16 +44,16 @@ pipeline {
             }
         }
         stage('Update the code') {
-            when {
-                beforeAgent true
-                allOf {
-                    expression { return params.Refresh == false };
-                //    expression { return params.COMPONENT.contains("base_project") == true }
-
-                }
-            }
+        //    when {
+        //        beforeAgent true
+        //        allOf {
+        //            expression { return params.Refresh == false };
+        //        //    expression { return params.COMPONENT.contains("base_project") == true }
+//
+        //        }
+        //    }
         }
-        stage('Run startup script') {
+//        stage('Run startup script') {
             steps {
                 script {
                         echo "====Running StartUp script ===="
@@ -67,7 +67,7 @@ pipeline {
                            """
                            }
                         }       
-            }  
+          //  }  
                         //}    
         stage('Build Docker Image') {
             steps {

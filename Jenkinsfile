@@ -51,8 +51,8 @@ pipeline {
         //        //    expression { return params.COMPONENT.contains("base_project") == true }
 //
         //        }
-        //    }
-        }
+//        //    }
+ //       }
 //        stage('Run startup script') {
             steps {
                 script {
@@ -68,7 +68,7 @@ pipeline {
                            }
                         }       
           //  }  
-                        //}    
+                        }    
         stage('Build Docker Image') {
             steps {
                 script {

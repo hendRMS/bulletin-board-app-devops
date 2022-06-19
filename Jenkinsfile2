@@ -33,6 +33,7 @@ spec:
         //registryCredential = 'dockerhub_id' 
         dockerImage = '' 
         def registryCredential = credentials('DockerHubCredentials')
+        def DOCKERHUB_CREDENTIALS_USR ="hend91"
         stage('Checkout from GitHub') {
                 checkout([
                     $class: 'GitSCM',
@@ -55,6 +56,7 @@ spec:
                            sed -i 's/380a66/366ec3/g' site.css
                            sed -i 's/Board/Board Demo!/g' index.html
                            echo ${registry}
+                           echo ${registryCredential}
                            """
                            }
                         }       
@@ -68,6 +70,7 @@ spec:
         stage('Push Docker Image') {
                 script {
                    echo "====Push Docker Image===="
+                   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     dockerImage.push() 
                         }    
                     }

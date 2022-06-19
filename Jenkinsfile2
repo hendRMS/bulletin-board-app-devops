@@ -40,7 +40,6 @@ spec:
                     branches: [[name: "*/master"]],
                     extensions: [],
                     userRemoteConfigs: [[
-                     //   credentialsId: 'rflx-jenkins',
                         url: 'https://github.com/hendRMS/bulletin-board-app-devops.git'
                         ]]
                 ])
@@ -56,6 +55,7 @@ spec:
                            sed -i 's/rgb/rgba/g' site.css
                            sed -i 's/380a66/366ec3/g' site.css
                            sed -i 's/Board/Board Demo!/g' index.html
+                           echo $registry
                            """
                            }
                         }       

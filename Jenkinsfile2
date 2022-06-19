@@ -27,6 +27,35 @@ spec:
 
 {
     node(POD_LABEL) {
+        stage('Checkout from GitHub') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "*/master"]],
+                    extensions: [],
+                    userRemoteConfigs: [[
+                     //   credentialsId: 'rflx-jenkins',
+                        url: 'https://github.com/hendRMS/bulletin-board-app-devops.git'
+                        ]]
+                ])
+
+            }
+        }
+        stage('Update the code') {
+            steps {
+                script {
+                        echo "====Running StartUp script ===="
+                        sh """
+                           sed -i 's/145/0,.1/g' site.css
+                           sed -i 's/98/0/g' site.css
+                           sed -i 's/41/0/g' site.css
+                           sed -i 's/rgb/rgba/g' site.css
+                           sed -i 's/380a66/366ec3/g' site.css
+                           sed -i 's/Board/Board Demo!/g' index.html
+                           """
+                           }
+                        }       
+            } 
         stage('Install Docker') {
             git 'https://github.com/hendRMS/bulletin-board-app-devops.git'
             container('docker') {

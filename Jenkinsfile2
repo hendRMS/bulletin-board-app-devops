@@ -28,6 +28,11 @@ spec:
 {
     node(POD_LABEL) {
         container('docker') { 
+        environment { 
+        registry = "hend91/node-board" 
+        //registryCredential = 'dockerhub_id' 
+        dockerImage = '' 
+        }
         stage('Checkout from GitHub') {
                 checkout([
                     $class: 'GitSCM',
@@ -53,14 +58,15 @@ spec:
                            """
                            }
                         }       
-        stage('Install Docker') {
-        //    git 'https://github.com/hendRMS/bulletin-board-app-devops.git'
-                stage('Build docker') {
-                    sh '''
-                    docker version
-                    '''
-                }
+        stage('Build Docker Image') {
+                script {
+                    echo "====Building Docker Image===="
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"       
+                        }  
             }
+        //
+
+        //    
         }
     }
 }

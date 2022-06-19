@@ -27,8 +27,8 @@ spec:
 
 {
     node(POD_LABEL) {
+        container('docker') { 
         stage('Checkout from GitHub') {
-            steps {
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: "*/master"]],
@@ -38,11 +38,9 @@ spec:
                         url: 'https://github.com/hendRMS/bulletin-board-app-devops.git'
                         ]]
                 ])
-
             }
-        }
+
         stage('Update the code') {
-            steps {
                 script {
                         echo "====Running StartUp script ===="
                         sh """
@@ -55,10 +53,8 @@ spec:
                            """
                            }
                         }       
-            } 
         stage('Install Docker') {
-            git 'https://github.com/hendRMS/bulletin-board-app-devops.git'
-            container('docker') {
+        //    git 'https://github.com/hendRMS/bulletin-board-app-devops.git'
                 stage('Build docker') {
                     sh '''
                     docker version
@@ -66,7 +62,7 @@ spec:
                 }
             }
         }
-
     }
 }
+
 

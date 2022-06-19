@@ -58,10 +58,6 @@ spec:
 
                         }    
                    }
-        stage('Cleaning up') { 
-              sh "docker rmi $registry:$BUILD_NUMBER" 
-
-                } 
         }
     }
 }

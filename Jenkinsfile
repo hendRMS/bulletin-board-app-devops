@@ -16,7 +16,7 @@ spec:
     node(POD_LABEL) {
         container('docker') { 
        
-       def registry = "hend91/node-board" 
+    //   def registry = "hend91/node-board" 
         stage('Checkout from GitHub') {
                 checkout([
                     $class: 'GitSCM',
@@ -45,7 +45,7 @@ spec:
         stage('Build Docker Image') {
                 script {
                     echo "====Building Docker Image===="
-                    dockerImage = docker.build ${registry}+ ":$BUILD_NUMBER"       
+                    dockerImage = docker.build hend91/node-board+ ":$BUILD_NUMBER"       
                         }  
             }
         //

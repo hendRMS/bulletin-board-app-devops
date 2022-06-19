@@ -38,14 +38,13 @@ spec:
                            sed -i 's/rgb/rgba/g' site.css
                            sed -i 's/380a66/366ec3/g' site.css
                            sed -i 's/Board/Board Demo!/g' index.html
-                           echo ${registry}
                            """
                            }
                         }       
         stage('Build Docker Image') {
                 script {
                     echo "====Building Docker Image===="
-                    dockerImage = docker.build hend91/node-board+ ":$BUILD_NUMBER"       
+                    dockerImage = docker.build hend91/node-board + ":$BUILD_NUMBER"       
                         }  
             }
         //

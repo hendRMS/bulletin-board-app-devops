@@ -44,7 +44,7 @@ spec:
         stage('Build Docker Image') {
                 script {
                     echo "====Building Docker Image===="
-                    dockerImage = docker.build hend91/node-board + ":$BUILD_NUMBER"       
+                    dockerImage = docker.build "hend91/node-board" + ":$BUILD_NUMBER"       
                         }  
             }
         //

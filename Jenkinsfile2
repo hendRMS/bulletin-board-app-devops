@@ -28,12 +28,11 @@ spec:
 {
     node(POD_LABEL) {
         container('docker') { 
-        environment { 
-        registry = "hend91/node-board" 
+       
+       def registry = "hend91/node-board" 
         //registryCredential = 'dockerhub_id' 
         dockerImage = '' 
         registryCredential = 'DockerHubCredentials'
-        }
         stage('Checkout from GitHub') {
                 checkout([
                     $class: 'GitSCM',
@@ -55,7 +54,7 @@ spec:
                            sed -i 's/rgb/rgba/g' site.css
                            sed -i 's/380a66/366ec3/g' site.css
                            sed -i 's/Board/Board Demo!/g' index.html
-                           echo $registry
+                           echo ${registry}
                            """
                            }
                         }       

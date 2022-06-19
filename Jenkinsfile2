@@ -32,6 +32,7 @@ spec:
         registry = "hend91/node-board" 
         //registryCredential = 'dockerhub_id' 
         dockerImage = '' 
+        registryCredential = 'DockerHubCredentials'
         }
         stage('Checkout from GitHub') {
                 checkout([

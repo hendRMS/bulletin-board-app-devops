@@ -32,7 +32,7 @@ spec:
        def registry = "hend91/node-board" 
         //registryCredential = 'dockerhub_id' 
         dockerImage = '' 
-        registryCredential = 'DockerHubCredentials'
+        def registryCredential = credentials('DockerHubCredentials')
         stage('Checkout from GitHub') {
                 checkout([
                     $class: 'GitSCM',

@@ -4,9 +4,7 @@ kind: Pod
 spec:
   containers:
   - name: docker
-    runtimeClassName: sysbox-runc
-    image: docker
-    #image: docker:20.10.17-dind
+    image: docker:20.10.17-dind
     securityContext:
       privileged: true
     env:
